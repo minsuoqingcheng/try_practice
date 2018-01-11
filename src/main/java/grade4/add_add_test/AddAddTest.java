@@ -36,7 +36,7 @@ public class AddAddTest {
 
     static int lastUpResult(int quotient, int remainder) {
         quotient = remainder == 0 ? quotient : quotient++;
-        System.out.println("use the number");
+        System.out.println("use the number"+quotient);
         return quotient;
     }
 }
