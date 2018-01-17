@@ -11,6 +11,9 @@ public class ColorEnumSet {
         Set<Color> complementSet = EnumSet.complementOf(EnumSet.of(Color.RED));
 //        Set<Color> allColor = EnumSet.allOf(Color.class);
 //        colorSet.addAll(allColor);
+        EnumSet<Color> colors = EnumSet.noneOf(Color.class);
+        colors.add(Color.RED);
+        System.out.println(colors);
         for (Color color : colorSet) {
             System.out.println(color.name());
         }
