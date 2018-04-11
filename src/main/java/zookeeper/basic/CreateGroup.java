@@ -1,4 +1,4 @@
-package zookeeper;
+package zookeeper.basic;
 
 import org.apache.zookeeper.*;
 
@@ -9,17 +9,17 @@ public class CreateGroup implements Watcher {
 
     private static final int SESSION_TIMEOUT = 5000;
     private ZooKeeper zooKeeper;
-    private CountDownLatch connectedSingal = new CountDownLatch(1);
+    private CountDownLatch connectedSignal = new CountDownLatch(1);
 
     public void connect(String host) throws IOException, InterruptedException {
         zooKeeper = new ZooKeeper(host, SESSION_TIMEOUT, this);
-        connectedSingal.await();
+        connectedSignal.await();
     }
 
     @Override
     public void process(WatchedEvent watchedEvent) {
         if (watchedEvent.getState() == Event.KeeperState.SyncConnected) {
-            connectedSingal.countDown();
+            connectedSignal.countDown();
         }
     }
 
