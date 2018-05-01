@@ -1,4 +1,4 @@
-package block_queue_demo;
+package block_chain_demo;
 
 public class Block {
 

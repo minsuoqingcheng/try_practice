@@ -1,4 +1,4 @@
-package block_queue_demo;
+package block_chain_demo;
 
 import com.google.gson.GsonBuilder;
 
