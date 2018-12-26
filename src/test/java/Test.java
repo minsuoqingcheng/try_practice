@@ -1,5 +1,11 @@
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class Test {
@@ -15,30 +21,30 @@ public class Test {
 //        System.out.println(tests);
 //
 //        Object o = new ArrayList<>();
-        List<Integer> integers = new ArrayList<>();
-        integers.add(10);
-        integers.add(9);
-
-        print(integers);
-
-        List<String> s1 = new ArrayList<>();
-        s1.add("s1_1");
-        s1.add("s1_2");
-
-        List<String> s2 = new ArrayList<>();
-        s2.add("s2_1");
-        s2.add("s2_2");
-
-        List<List<String>> ss = new ArrayList<>();
-        ss.add(s1);
-        ss.add(s2);
-
-        print(ss);
+        long time = System.currentTimeMillis();
+        System.out.println(time);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        String format = sdf.format(new Date(new Timestamp(time).getTime()));
+        String s = format+"Z";
+        System.out.println(toTimeStamp(s).getTime());
 
     }
 
     private static void print(List<?> list) {
         list.forEach(System.out::println);
+    }
+
+
+    public static Timestamp toTimeStamp(String time) {
+        int length = time.length();
+        time = time.substring(0, length-1);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        try {
+            return new Timestamp(sdf.parse(time).getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return new Timestamp(System.currentTimeMillis());
     }
 
 }
