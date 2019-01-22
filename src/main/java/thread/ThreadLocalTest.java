@@ -3,7 +3,12 @@ package thread;
 public class ThreadLocalTest {
 
     public static void main(String[] args) {
-        ThreadLocal<String> threadLocal = new ThreadLocal<>();
+        ThreadLocal<String> threadLocal = new ThreadLocal<String>() {
+            @Override
+            protected String initialValue() {
+                return super.initialValue();
+            }
+        };
         /**
          * get()方法执行过程
          * 1、获取当前线程，在当前线程中取得ThreadLocalMap，如果ThreadLocalMap不为null，
