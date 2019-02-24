@@ -21,12 +21,9 @@ public class Test {
 //        System.out.println(tests);
 //
 //        Object o = new ArrayList<>();
-        long time = System.currentTimeMillis();
-        System.out.println(time);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        String format = sdf.format(new Date(new Timestamp(time).getTime()));
-        String s = format+"Z";
-        System.out.println(toTimeStamp(s).getTime());
+        double data = 0.163;
+        double res = (double) Math.round(data * 100) / 100;
+        System.out.println(res);
 
     }
 
