@@ -1,4 +1,4 @@
-package obeject;
+package object;
 
 public class ObjectCloneTest implements Cloneable {
 
