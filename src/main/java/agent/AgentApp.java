@@ -6,6 +6,10 @@ import java.lang.instrument.Instrumentation;
 
 
 //java -javaagent:agent.jar MainRun
+
+/**
+ * link: https://juejin.im/post/5cc01e83f265da0373718923
+ */
 public class AgentApp {
 
     public static void premain(String agentOps, Instrumentation inst) {
