@@ -1,5 +1,10 @@
 package test;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 public class Person {
 
     private int age;
@@ -22,6 +27,10 @@ public class Person {
         return name;
     }
 
+    @Test
+    @Before
+    @After
+    @BeforeClass
     public void setName(String name) {
         this.name = name;
     }

@@ -85,7 +85,7 @@ public class HashMapDilatationTest {
 //                            newTab[e.hash & (newCap - 1)] = e;
 //                        else if (e instanceof HashMap.TreeNode)
 //                            ((HashMap.TreeNode<K,V>)e).split(this, newTab, j, oldCap);
-//                        else { // preserve order
+//                        else { // preserve calculate
 //                            HashMap.Node<K,V> loHead = null, loTail = null;
 //                            HashMap.Node<K,V> hiHead = null, hiTail = null;
 //                            HashMap.Node<K,V> next;
