@@ -8,7 +8,7 @@ public enum Father {
     //class byte code
     /**
      *
-     * public final enum grade4/enum_test/Father extends java/lang/Enum
+     * public final enums grade4/enum_test/Father extends java/lang/Enum
      *
      * 因为枚举类编译后声明成final，所以无法被继承
      *

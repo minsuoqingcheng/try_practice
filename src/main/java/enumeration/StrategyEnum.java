@@ -1,6 +1,6 @@
 package enumeration;
 
-//strategy enum type
+//strategy enums type
 public enum StrategyEnum {
 
     MONDAY,
