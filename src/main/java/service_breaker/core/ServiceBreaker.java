@@ -1,7 +1,6 @@
 package service_breaker.core;
 
 import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 import service_breaker.hook.BreakerStateChangeHook;
 import service_breaker.strategy.FuseStrategyChooseFactory;
 import service_breaker.strategy.FuseStrategyExecutor;
@@ -15,7 +14,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 @Getter
-@Slf4j
 public class ServiceBreaker {
 
     private Lock readLock;
@@ -57,7 +55,7 @@ public class ServiceBreaker {
 
 
     public Object invoke(Method method, Object obj, Object... args) throws Exception {
-        log.info("service breaker is running, name is {}, state is {}", this.name, this.state);
+        System.out.println("service breaker is running, name is " + this.name + ", state is " + this.state);
         method.setAccessible(true);
         beforeCall();
         Object res = null;
@@ -66,9 +64,8 @@ public class ServiceBreaker {
         try {
             this.metrics.onCall();
             res = method.invoke(obj, args);
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            log.error("reflect error, exception is {}", e.getMessage());
-        } catch (Exception e) {
+        } catch (InvocationTargetException e) {
+            System.out.println("call target method error, message is " + e.getTargetException().getMessage());
             callException = e;
         }
 
@@ -88,20 +85,22 @@ public class ServiceBreaker {
             switch (this.state) {
                 case OPEN:
                     if (this.stateOpenTime.plusNanos(this.sleepTimeout.toNanos()).isBefore(now)) {
-                        log.info("break open sleep time end, turn to half open");
+                        System.out.println("break open sleep time end, turn to half open");
                         changeState(BreakerState.HALF_OPEN, now);
                     }
                     throw new BreakOpenException("break is open");
                 case HALF_OPEN:
                     if (this.metrics.getCountAll() >= this.halfMaxCalls) {
-                        log.info("break is half open and total request greater than max call");
+                        System.out.println("break is half open and total request greater than max call");
                         changeState(BreakerState.OPEN, now);
                         throw new BreakOpenException("break is half open");
                     }
+                    break;
                 case CLOSED:
                     if (this.metrics.getNextWindowTimeStart().isBefore(now)) {
                         nextWindow(now);
                     }
+                    break;
             }
 
         } finally {
